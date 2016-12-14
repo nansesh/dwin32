@@ -1,0 +1,37 @@
+A string literal starts with ' and ends with '
+e.g 'abcd', '1234' , 'adf45_$%l34'.
+
+To put ' character into the string use the escape character \
+e.g 'string with \' in it'
+
+Similarly to put \ character into the string use the same \ as escape character
+e.g 'c:\\windows' - to specify c:\windows
+
+
+make_windows_function(dll_name,function_name,signature)
+ *dll_name - the name of the dll as a string
+ *function_name - name of the function - use only unicode version of win32 functions, like LoadLibraryW
+ *signature - look at signature specification section.
+
+
+Signature specification section
+-------------------------------
+
+s - to specify unicode string
+i - to specify integer.
+
+r - reference modifier on the type.
+e.g rs means reference to string.
+
+to specify that a function takes two string argument use 'ss'
+to specify that a function takes an integer, followed by a string, followed by a integer, say 'isi'
+
+to specify a function that returns a string and takes integer argument use 'i)s'
+
+) is used to introduce the return type - if not used a default return type of integer is used.
+
+to specify a function that takes no argument use ')i' - this is to overcome the error one would get when one uses empty string.
+to specify a function that takes pointer to another function that takes integer argument use
+'(i)i' - the second 'i' is the return type of the function that is taken in as argument.
+
+( is used to introduce function type.

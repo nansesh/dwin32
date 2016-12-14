@@ -1,0 +1,19 @@
+ew = make_windows_function('user32.dll','EnumWindows','(ii)ii')
+
+gwt = make_windows_function('user32.dll','GetWindowTextW','irsi')
+
+s = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+cb = make_function('a','b','gwt(a,s=\'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\',strlen(s))?print(s):print(s)')
+
+ew(cb,'0')
+
+00791644
+
+cew = make_windows_function('user32.dll','CreateWindowExW','issiiiiiiiii')
+gm = make_windows_function('user32.dll','GetMessageW','rsiii')
+tm = make_windows_function('user32.dll','TranslateMessage','s')
+dm = make_windows_function('user32.dll','DispatchMessageW','s')
+hwnd = cew('0','EDIT','Hello From Dynamic Win32','0x14cf0000','0','0','100','100','0','0','0','0')
+msg = 'some string larger than 50 bytes is required. so that it covers the space that msg struture offers'
+msg_loop_expr = 'gm(msg,\'0\',\'0\',\'0\')?(print(tm(msg) + dm(msg)) + print(msg = \'resetting the message string for next iteration\')):\'0\''
+loop(msg_loop_expr)
